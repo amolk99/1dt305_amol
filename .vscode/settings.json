@@ -1,0 +1,5 @@
+{
+  "python.analysis.extraPaths": [
+    "./LNU_project/lib"
+  ]
+}
