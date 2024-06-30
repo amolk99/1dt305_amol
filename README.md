@@ -23,7 +23,6 @@ Approximate time to complete: 5-6 hours
 ### Why You Chose the Project
 
 I chose this project because it offers practical insights into the internet of things; and sensors that I have not used before. I personally have used Arduinos and other microcontrollers extensively before but not with any form of wireless communications, so this was a fun insight into that aspect of IoT. I often try finding ways to accomodate my apartment for the perfect temperature for me and also my dog. He is a fluffy black Groenendael so I though why not make an automatic system that can adjust the temperature and humidity for him, since he is quite sensitive to the recent hot weather we've been having in southern Sweden. Unfortunately due to time restraints and my other school work taking up a lot of my time, I could not finish the project as I would like to. Currently I get the temperature and humidity from the sensors and send it to ThingSpeak, but I would like to add a relay to control a heater or a fan to adjust the temperature and humidity. I made it such that the ThingSpeak channel is public so you can see the data [here](https://thingspeak.com/channels/2583390).
-
 Ideally what I want for this project is that after the "feels like" temperature reaches some predefined threshold, the PI sends a Telegram update to me and my partner about the temperature and conditions at home, if we're not around. It would be a fun project to work on and I would like to finish it in the future. It would also send updates to us if any action has been taken to adjust the indoor climate. It would also alert about severe conditions through a telegram channel.
 
 ### What Purpose Does it Serve
@@ -34,26 +33,12 @@ The device can be used for environmental monitoring, helping to maintain optimal
 
 By collecting data on temperature and humidity, the project will provide insights into environmental patterns and help in understanding how these factors vary over time and through seasons and the day. It is a cheap way to get a climate monitor for your home or apartment, and it can be expanded to include more sensors and more control over the indoor climate; and also through notifications and display directly on personal phones through services like Telegram bots.
 
-## Material
-
-### List of Material
-
-- DHT11 Temperature and Humidity Sensor - Specifications: Measures temperature and humidity
-- DS18B20 Digital Temperature Sensor - Specifications: Digital temperature sensor
-- Raspberry Pi Pico
-- Wires
-- Breadboard
-- USB Cable
-- Resistors (if needed)
-
-### Specifications and Cost
+### Materials Used with Specifications and Cost
 
 - **DHT11 Temperature and Humidity Sensor:** Measures temperature and humidity; bought from [Electrokit](https://www.electrokit.com/en/digital-temperatur-och-fuktsensor-dht11), cost: 49 kr.
 - **DS18B20 Digital Temperature Sensor:** Measures temperature; bought from [Electrokit](https://www.electrokit.com/en/temperatursensor-ds18b20), cost: 42 sek.
 - **Raspberry Pi Pico:** Microcontroller; bought from [Electrokit](https://www.electrokit.com/en/raspberry-pi-pico-wh), cost: 109 sek.
 - **Wires, Breadboard, Resistors:** Various; bought from [Electrokit](https://www.electrokit.com/en/labbsladd-20-pin-15cm-hane/hane), cost: 29 sek.
-
-### Example
 
 In this project, I have worked with the Raspberry Pi Pico WH. It's a compact device programmed with MicroPython and has built-in WiFi capabilities, making it well-suited for this IoT project.
 
@@ -87,27 +72,23 @@ Thonny IDE for uploading and actually running code on macOS, and VS code for a n
 
 ### Step-by-Step Instructions
 
-1. Preparing the Breadboard
+1. **Preparing the Breadboard**
+   - Place the Raspberry Pi Pico on the breadboard with the pins inserted into the holes.
 
-    - Place the Raspberry Pi Pico on the breadboard with the pins inserted into the holes.
+2. **Connecting the DHT11 Sensor**
+   - The DHT11 sensor has four pins: VCC, Data, NC (Not Connected), and GND.
+   - Connect the VCC pin of the DHT11 to the 3.3V pin on the Raspberry Pi Pico (Pin 36 or 3V3(OUT)).
+   - Connect the GND pin of the DHT11 to a GND pin on the Raspberry Pi Pico (Pin 38 or any other GND pin).
+   - Connect the Data pin of the DHT11 to GPIO 14 on the Raspberry Pi Pico (Pin 19).
 
-2. Connecting the DHT11 Sensor
+3. **Connecting the DS18B20 Sensor**
+   - The DS18B20 sensor has three pins: VCC, Data, and GND.
+   - Connect the VCC pin of the DS18B20 to the 3.3V pin on the Raspberry Pi Pico (Pin 36 or 3V3(OUT)).
+   - Connect the GND pin of the DS18B20 to a GND pin on the Raspberry Pi Pico (Pin 38 or any other GND pin).
+   - Connect the Data pin of the DS18B20 to GPIO 15 on the Raspberry Pi Pico (Pin 20).
 
-    - The DHT11 sensor has four pins: VCC, Data, NC (Not Connected), and GND.
-    - Connect the VCC pin of the DHT11 to the 3.3V pin on the Raspberry Pi Pico (Pin 36 or 3V3(OUT)).
-    - Connect the GND pin of the DHT11 to a GND pin on the Raspberry Pi Pico (Pin 38 or any other GND pin).
-    - Connect the Data pin of the DHT11 to GPIO 14 on the Raspberry Pi Pico (Pin 19).
-
-3. Connecting the DS18B20 Sensor
-
-    - The DS18B20 sensor has three pins: VCC, Data, and GND.
-    - Connect the VCC pin of the DS18B20 to the 3.3V pin on the Raspberry Pi Pico (Pin 36 or 3V3(OUT)).
-    - Connect the GND pin of the DS18B20 to a GND pin on the Raspberry Pi Pico (Pin 38 or any other GND pin).
-    - Connect the Data pin of the DS18B20 to GPIO 15 on the Raspberry Pi Pico (Pin 20).
-
-4. Connecting the Raspberry Pi Pico to the Computer
-
-    - Use the USB cable to connect the Raspberry Pi Pico to your computer. This cable will provide power to the board and allow you to upload the code. Once the code is uploaded you can use any USB power source to power the Pico. For example a phone charger with a USB outlet.
+4. **Connecting the Raspberry Pi Pico to the Computer**
+   - Use the USB cable to connect the Raspberry Pi Pico to your computer. This cable will provide power to the board and allow you to upload the code. Once the code is uploaded, you can use any USB power source to power the Pico, such as a phone charger with a USB outlet.
 
 ### Electrical Calculations
 
@@ -136,8 +117,6 @@ ThingSpeak allows for real-time data collection, visualization, and analysis. It
 ## The Code
 
 The code itself is quite simple and the functions are named according to what they do. This code connects a Raspberry Pi Pico to WiFi and reads data from two temperature sensors (DS18B20 and DHT11) and a humidity sensor (DHT11). It calculates the heat index based on the temperature and humidity readings. The data is then sent to the ThingSpeak cloud platform via MQTT for monitoring and analysis. The onboard LED and an external LED are used to provide visual feedback for WiFi connection status and data transmission.
-
-### Core Functions
 
 ```python
 import network
@@ -290,3 +269,41 @@ while True:
 - **Sending Data to ThingSpeak:** The onboard LED blinks slowly twice.
 - **Data Sent Successfully:** The onboard LED stays on solid for 1 second.
 - **Failed to Send Data:** The onboard LED blinks rapidly five times.
+
+### Core Functions
+
+This code connects a Raspberry Pi Pico to WiFi and reads data from two temperature sensors (DS18B20 and DHT11) and a humidity sensor (DHT11). It calculates the heat index based on the temperature and humidity readings. The data is then sent to the ThingSpeak cloud platform using MQTT for monitoring and analysis. The onboard LED and an external LED are used to provide visual feedback for WiFi connection status and data transmission.
+
+### How the Code Works
+
+1. **Initialisation**: The code initialises the DS18B20 and DHT11 sensors and other components. It also sets up the MQTT client for data transmission to ThingSpeak.
+
+2. **WiFi Connection**: The `connect_to_wifi()` function connects the Raspberry Pi Pico to the specified WiFi network and provides visual feedback using the onboard LED.
+
+3. **Data Reading**: The `read_temperature()` and `read_dht11()` functions read temperature and humidity data from the DS18B20 and DHT11 sensors.
+
+4. **Heat Index Calculation**: The `calculate_heat_index()` function calculates the heat index based on temperature and humidity readings.
+
+5. **MQTT Publishing**: The `mqtt_publish()` function sends the sensor data to the ThingSpeak platform via MQTT.
+
+6. **Main Loop**: The main loop continuously reads sensor data, calculates the heat index, and publishes the data to ThingSpeak.
+
+### How it Achieves the Task
+
+The code achieves the task by reading sensor data, calculating data like the heat index, and transmitting the data to the ThingSpeak platform for monitoring and analysis.
+
+## Summary
+
+### How It Went and Final Remarks
+
+The project was largely fun and a success, though it seems rather simple due to the time limitations I had. It gave interesting insights into how temperature and humidity work and the IoT implementation of the sensors through ThingSpeak. The implementation of MQTT for data transmission was particularly straightforward, which shows how well integrated services, and the IoT world have become in general. The project can be expanded in the future to include more sensors and visualisation or notification options for the user, making it a versatile and practical IoT solution to monitor and control the indoor climate for whatever setting.
+
+### Results
+
+Below is a screenshot of the results from the ThingSpeak channel showing the temperature, humidity, and heat index data received from the Raspberry Pi Pico. It is a public channel so you can see the live data [here](https://thingspeak.com/channels/2583390).
+
+![Results](results.png)
+*Results from ThingSpeak*
+
+![Implementation](final.jpeg)
+*Implementation of the device*
