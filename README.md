@@ -31,7 +31,7 @@ The device can be used for environmental monitoring, helping to maintain optimal
 
 ### What Insights You Think it Will Give
 
-By collecting data on temperature and humidity, the project will provide insights into environmental patterns and help in understanding how these factors vary over time and through seasons and the day. It is a cheap way to get a climate monitor for your home or apartment, and it can be expanded to include more sensors and more control over the indoor climate; and also through notifications and display directly on personal phones through services like Telegram bots.
+By collecting data on temperature and humidity, the project will provide insights into environmental patterns like temperature and humidity, and help in understanding how these factors vary over time and through seasons and the day. It is a cheap way to get a climate monitor for your home or apartment, and it can be expanded to include more sensors and more control over the indoor climate; and also through notifications and display directly on personal phones through services like Telegram bots.
 
 ### Materials Used with Specifications and Cost
 
